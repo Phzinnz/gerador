@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de senha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <h1>Gerador de Senha</h1> 
+    <div id="cont">
+   Comprimento: <input type="number" id="length" value="4" min="4" max="64" > <br> <br>
+   Letras Minúscula <input type="checkbox" name="Letra miúscula" id="lowercase">  <br> <br>
+   Letras Maiúscula <input type="checkbox" name="Letra Maiúscula" id="uppercase"> 
+   <br> <br>
+   Símbolos <input type="checkbox" name="símbolos" id="simbolos"> 
+   <br> <br>
+   Número <input type="checkbox" name="numero" id="numero"> 
+   <br><br>
+   <input type="submit" value="Gerar Senha" onclick="gerar()" id="gerar">
+   <p id="senha"></p> 
+   </div>
+
+
+   <script>
+    function gerar(){
+      const length = document.getElementById('length').value
+      const uselower = document.getElementById ('lowercase').checked
+      const useupper = document.getElementById('uppercase').checked
+      const usesimbolo = document.getElementById('simbolos').checked
+      const usenumero = document.getElementById('numero').checked
+
+      const lower = "abcdefghijklmnopqrstuvwyz";
+      const upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      const simbolo = "!@#$%¨&*()-_=+{}~^?/:;.,><|";
+      const numero = "0123456789";
+
+      let chars = ""
+      if(uselower)chars += lower;
+      if(useupper)chars += upper;
+      if(usesimbolo)chars += simbolo;
+      if(usenumero)chars += numero;
+
+      if(chars === ""){
+        document.getElementById(senha).textContent = "Tente Novamente(Valor Inválido)";
+        return;
+      }
+
+      let senha = ""
+      for(let i = 0; i < length; i++){
+        const randomIndex = Math.floor(Math.random() * chars.length)
+        senha += chars[randomIndex]
+      }
+      document.getElementById('senha').textContent = `O senha é ${senha}`
+    }  
+   </script>
+</body>
+</html>
